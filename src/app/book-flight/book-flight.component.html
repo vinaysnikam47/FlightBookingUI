@@ -1,0 +1,71 @@
+<app-view-flights (flightToEmit)="showForm($event)"></app-view-flights>
+<br /><br />
+<div class="container" *ngIf="flightDetails">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>Booking for {{ flightDetails.aircraftName }}</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="bookingForm">
+            <div class="form-group">
+              <label>Passenger Name</label>
+              <input type="text" formControlName="passengerName" class="form-control" id="passengerName"/>
+              <div *ngIf="bookingForm.controls.passengerName.dirty && bookingForm.controls.passengerName.invalid" id="passengerNameError">
+                <h6 *ngIf="bookingForm.controls.passengerName.errors.required" class="alert alert-danger">Field Required</h6>
+                <div *ngIf="bookingForm.controls.passengerName.value">
+                  <h6 *ngIf="bookingForm.controls.passengerName.errors.pattern" class="alert alert-danger">
+                    Name can have only alphabets and spaces.
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Number of Tickets</label>
+              <input type="number" class="form-control" formControlName="noOfTickets" id="noOfTickets"/>
+              <div *ngIf="bookingForm.controls.noOfTickets.dirty && bookingForm.controls.noOfTickets.invalid" id="noOfTicketsError">
+                <h6 *ngIf="bookingForm.controls.noOfTickets.errors.required" class="alert alert-danger">
+                  Field Required
+                </h6>
+                <div *ngIf="bookingForm.controls.noOfTickets.value">
+                  <h6 *ngIf="bookingForm.controls.noOfTickets.errors.min" class="alert alert-danger">
+                    Minimum ticket is 1.
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Flight Id</label>
+              <input type="text" class="form-control" formControlName="flightId" id="flightId"/>
+            </div>
+            <div class="form-group">
+              <label>Customer Id</label>
+              <input type="text" class="form-control" formControlName="customerId" id="customerId"/>
+              <div *ngIf="bookingForm.controls.customerId.dirty && bookingForm.controls.customerId.invalid" id="customerIdError">
+                <h6 *ngIf="bookingForm.controls.customerId.errors.required" class="alert alert-danger">
+                  Field Required
+                </h6>
+                <div *ngIf="bookingForm.controls.customerId.value">
+                  <h6 *ngIf="bookingForm.controls.customerId.errors.customerIdErr" class="alert alert-danger">
+                    {{bookingForm.controls.customerId.errors.customerIdErr.message}}
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button type="button" class="btn btn-info btn-block" (click)="book()" [disabled]="bookingForm.invalid" id="book">Book</button>
+          <button type="button" class="btn btn-link btn-block" (click)="flightDetails = null">Check out flights?</button>
+          <div *ngIf="successMessage" id="successMessage">
+            <h6 class="alert alert-success text-center">{{ successMessage }}</h6>
+          </div>
+          <div *ngIf="errorMessage" id="errorMessage">
+            <h6 class="alert alert-danger text-center">{{ errorMessage }}</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

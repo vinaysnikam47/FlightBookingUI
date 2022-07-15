@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Update Booking</h3>
+                </div>
+                <div class="card-body">
+                    <form [formGroup] = "updateBookingForm">
+                        <div class="form-group">
+                            <label>Booking Id</label>
+                            <input class="form-control" type="text" formControlName = "bookingId" id = "bookingId">
+                        </div>
+                        <div class="form-group">
+                            <label>Number of Tickets</label>
+                            <input class="form-control" type="number" formControlName = "noOfTickets" id = "noOfTickets">
+                            <div *ngIf = "updateBookingForm.controls.noOfTickets.dirty && updateBookingForm.controls.noOfTickets.invalid">
+                                <h6 *ngIf = "updateBookingForm.controls.noOfTickets.errors.required" class="alert alert-danger">Field Required</h6>
+                                <div *ngIf = "updateBookingForm.controls.noOfTickets.value">
+                                    <h6 *ngIf = "updateBookingForm.controls.noOfTickets.errors.min" class="alert alert-danger">Minimum Ticket is 1</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Flight Id</label>
+                            <input class="form-control" type="text" formControlName = "flightId" id = "flightId">
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <button type="button" class="btn btn-primary" [disabled] = "updateBookingForm.invalid" (click) = "updateBooking()">Update Booking</button>
+                    <div *ngIf = "successMessage">
+                        <br/>
+                        <h6 class="alert alert-success text-center">{{successMessage}}</h6>
+                    </div>
+                    <div *ngIf = "errorMessage">
+                        <br/>
+                        <h6 class="alert alert-danger text-center">{{errorMessage}}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

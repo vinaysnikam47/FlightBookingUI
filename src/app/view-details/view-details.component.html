@@ -1,0 +1,66 @@
+<div class="container">
+    <div class = "row">
+        <div class="col-md-12" id = "filterForm">
+            <form class="form-inline justify-content-center">
+                <div class="form-group">
+                    <label>Customer Id:</label>&nbsp;
+                    <input type="text" class="form-control" #cId id="custId" name="custId">
+                </div> &nbsp;&nbsp;&nbsp;
+                <div class="form-group">
+                    <label>Flight Id:</label>&nbsp;
+                    <input type="text" class="form-control" #fId id="fId" name="fId">
+                </div> &nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-primary" (click) = "custId = cId.value; flightId = fId.value;">Filter</button> &nbsp;&nbsp;&nbsp;
+                <button type="reset" class="btn btn-secondary" (click) = "custId = ''; flightId = '';">Clear all</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class = "col-md-12" *ngIf = "bookings">
+            <br/>
+            <div *ngIf = "deleteSuccessMessage">
+                <h6 class="text-success text-center">
+                    {{deleteSuccessMessage}}
+                </h6>
+                <h6 class="text-warning text-center">Wait till page refresh itself !</h6>
+            </div>
+            <div *ngIf = "deleteErrorMessage">
+                <h6 class="text-danger text-center">{{deleteErrorMessage}}</h6>
+            </div>
+            <div class="card-deck justify-content-center">
+                <div *ngFor = "let booking of bookings | customerId:custId | flightId:flightId">
+                    <div class="card">
+                        <div class="card-header text-center">
+                            <h6 style="font-weight: bold;">Booking Id: {{booking.bookingId}}</h6>
+                            <h6>{{booking.flightId}}</h6>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <tr>
+                                    <td>Customer Id:</td>
+                                    <td>{{booking.customerId}}</td>
+                                </tr>
+                                <tr>
+                                    <td>No. of Tickets:</td>
+                                    <td>{{booking.noOfTickets}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Boooking Cost:</td>
+                                    <td>{{booking.bookingCost}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-danger btn-sm" [disabled] = "booking.bookingCost > 3000" (click) = "delete(booking.bookingId)">Delete</button> &nbsp;&nbsp;
+                            <button type="button" class="btn btn-success btn-sm" [routerLink] = "['/updateBooking', booking.bookingId, booking.flightId]">Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12" *ngIf = "errorMessage">
+            <br/>
+            <h3 class="display-4 text-danger text-center">{{errorMessage}}</h3>
+        </div>
+    </div>
+</div>

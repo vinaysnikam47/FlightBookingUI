@@ -1,0 +1,17 @@
+<nav class="navbar navbar-expand-sm bg-info navbar-dark">
+  <div class="navbar-header">
+    <a class="nav-item active navbar-brand" href="#">Infy Airlines</a> 
+  </div>
+  <ul class="nav navbar-nav">
+    <li class="nav-item active">
+      <a [routerLink]="['/book']" class="nav-link">Book Flight</a>
+    </li>
+    <li class="nav-item active">
+      <a [routerLink]="['/view']" class="nav-link">View Details</a>
+    </li>
+  </ul>
+</nav>
+<br>
+<div class="container-fluid">
+  <router-outlet></router-outlet>
+</div>

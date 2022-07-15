@@ -1,0 +1,43 @@
+#filterForm{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: rgb(206, 242, 248);
+}
+
+.card {
+    background-color: rgb(193, 229, 236);
+    color: var(--q-label);
+    font-style: normal;
+    font-variant-ligatures: normal;
+    font-variant-caps: normal;
+    font-variant-numeric: normal;
+    font-variant-east-asian: normal;
+    font-stretch: normal;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-weight: 300;
+    margin: 27px;
+    z-index: 2;
+    padding: 5px;
+    width: 320px
+}
+
+.card-body{
+    background-color: white;
+    padding: 0px;
+}
+
+table tr td {
+    padding-top: 3px;
+    padding-bottom: 3px;   
+    font-size: 15px;
+}
+
+.card-header{
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.card-footer{
+    padding-top: 4px;
+    padding-bottom: 2px;
+}

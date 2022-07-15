@@ -1,0 +1,30 @@
+<h4 class="text-center" style="color: rgb(66, 148, 185);">Welcome to Infy Airlines!</h4>
+<br/>
+<div *ngIf = "errorMessage">
+    <p class="display-4 text-danger text-center">{{errorMessage}}</p>
+</div>
+<div class="container-fluid" *ngIf = "flightDetails">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="card-deck justify-content-center">
+                <div *ngFor = 'let flight of flightDetails; let i = index'>
+                    <div class="card">
+                        <img class="card-img-top" [src]="imgUrl[i]" alt = {{flight.flightId}}>
+                        <p class="text-center">{{flight.aircraftName}} | {{flight.flightId}}</p>
+                        <div class="card-body">
+                            <div>Fare: {{flight.fare}}</div>
+                            <div style="border-bottom: none;">Available Seats: {{flight.availableSeats}}</div>
+                        </div><br/>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-info" style="width:120px" (click) = "sendFlightData(flight)" [disabled]="flight.availableSeats == 0 || flight.status == 'Cancelled'">
+                                Book Tickets
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
